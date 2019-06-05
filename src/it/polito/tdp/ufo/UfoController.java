@@ -70,9 +70,9 @@ public class UfoController {
     		return;
     	}
     	this.model.creaGrafo(anno.getYear());
-    	txtResult.appendText("Grafo creato!");
-    	txtResult.appendText("# vertici: "+this.model.getNvertici());
-    	txtResult.appendText("# archi: "+this.model.getNarchi());
+    	txtResult.appendText("Grafo creato!\n");
+    	txtResult.appendText("# vertici: "+this.model.getNvertici()+"\n");
+    	txtResult.appendText("# archi: "+this.model.getNarchi()+"\n");
     	
     	this.boxStato.getItems().addAll(this.model.getStati());
 
@@ -80,6 +80,18 @@ public class UfoController {
 
     @FXML
     void handleSequenza(ActionEvent event) {
+    	String statoSource= boxStato.getValue();
+    	if(statoSource==null) {
+    		txtResult.appendText("Devi selezionare uno Stato!\n");
+    		return;
+    	}
+    	
+    	List<String>percorso= this.model.getPercorsoMassimo(statoSource);
+    	txtResult.clear();
+    	txtResult.appendText("PRCORSO MASSIMO: \n");
+    	
+    	for(String s: percorso)
+    		txtResult.appendText(s+" - ");
     	
 
     }
